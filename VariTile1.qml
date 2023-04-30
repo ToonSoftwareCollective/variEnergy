@@ -69,7 +69,7 @@ Tile {
 		}
 		color: !dimState? "black" : "white"
 		text: "(" + app.lastUpdate + ")"
-		visible: app.currentPrice.length>1
+		visible: debugOutput
 	}
 	
 

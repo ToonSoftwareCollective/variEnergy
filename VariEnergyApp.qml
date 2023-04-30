@@ -173,10 +173,19 @@ App {
                     var JsonString = xhr.responseText
                     var JsonObject= JSON.parse(JsonString)
 					var priceVari
-                    for (var a in JsonObject.Prices){
+					for (var i = 0; i < 24; i++) {
+						if(JsonObject.Prices[i]){
+							priceVari = JsonObject.Prices[i].price
+						}else{
+							priceVari = 0
+						}
+						pricesToday10.push(priceVari*10)
+					}
+/*                    for (var a in JsonObject.Prices){
 						priceVari = JsonObject.Prices[a].price
 						pricesToday10.push(priceVari*10)
 					}
+*/
 					if (debugOutput) console.log("*********variEnergy pricesToday10 getVaripricesToday: " + JSON.stringify(pricesToday10));
 					valuesUpdated()
                 }
@@ -204,12 +213,30 @@ App {
                     var JsonString = xhr.responseText
                     var JsonObject= JSON.parse(JsonString)
 					var priceVari
-                    for (var a in JsonObject.Prices)
+					for (var i = 0; i < 24; i++) {
+						if (debugOutput) console.log("*********variEnergy xhr.responseText checking : " + "Prices["+i+"].price")
+						if(JsonObject.Prices[i]){
+							if (debugOutput) console.log("*********variEnergy found : " + "Prices["+i+"].price")
+							priceVari = JsonObject.Prices[i].price
+						}else{
+							if (debugOutput) console.log("*********variEnergy not found : " + "Prices["+i+"].price")
+							priceVari = 0
+						}
+						prices.push(priceVari)
+						prices10.push(priceVari*10)
+					}
+
+ /*                   for (var a in JsonObject.Prices)
 					{
 						priceVari = JsonObject.Prices[a].price
 						prices.push(priceVari)
 						prices10.push(priceVari*10)
 					}
+*/
+
+
+
+					if (debugOutput) console.log("*********variEnergy prices10 getVaripricesToday: " + JSON.stringify(prices10));
 					currentPriceRaw = JsonObject.Prices[0].price
 					currentPrice = currentPriceRaw
 					currentPrice = currentPrice.replace(".",",")
